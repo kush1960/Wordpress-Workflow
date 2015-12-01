@@ -12,7 +12,6 @@ get_header(); ?>
 	</article>
 
 	
-	<?php } ?>
 
 	<?php endwhile; else: ?>
 		<p>Sorry, no posts matched your criteria.</p>

@@ -13,8 +13,7 @@ get_header(); ?>
 		<?php the_content();?>
 	</article>
 
-	
-	<?php } ?>
+
 
 	<?php endwhile; else: ?>
 		<p>Sorry, no posts matched your criteria.</p>
