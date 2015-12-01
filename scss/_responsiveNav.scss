@@ -1,0 +1,187 @@
+/*! Based on responsive-nav.js 1.0.39 by @viljamis */
+
+$navButtonBkgColour      : $bodyLinkColor;
+$navOpenBackgroundColour : $blue;
+$navLinkColour           : #fff;
+$navCurrentLinkColour    : $bodyLinkColor;
+
+
+
+nav.main{
+
+  ul {
+    margin: 0;
+    width: 100%;
+    display: block;
+    list-style: none;  
+  }
+
+
+}
+
+.opened {
+    max-height: 9999px;
+}
+
+nav.main{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+
+/* Nav button - injected by JS */
+
+.nav-toggle {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-decoration: none;
+  text-indent: -999px;
+  position: absolute;
+  top:0; right:0;
+  overflow: hidden;
+  width: 82px;
+  height: 82px;
+  margin:0;
+  background:url("img/burgerMenu.svg") center center no-repeat $navButtonBkgColour;
+  z-index: 99;
+}
+.no-svg .nav-toggle{
+  background-image:url("img/burgerMenu.png");
+}
+
+.nav-toggle.active {
+  background-image: url("img/burgerMenu.svg"); /* this could be changed to a cross or different colour icon */
+  position:absolute;
+}
+.no-svg .nav-toggle.active{
+  background-image:url("img/burgerMenu.png");
+}
+
+.js nav.closed{
+    display:none;
+  @include breakpoint($nav) {
+    display:block;
+  }  
+}
+
+// Hamburger menu (opened)
+.js nav.opened{
+
+  ul{
+    position: absolute;
+    top:0; left: 0; right: 0;
+    overflow:auto;
+    overflow-x: hidden;
+    z-index: 98;
+    padding-top: 82px; // set the position where the menu items begin when menu open
+  }
+  li{
+    background: $navOpenBackgroundColour;    
+    padding: 0 20px;
+  }
+  a{
+    display: block;
+    padding: 15px 0;
+    border-bottom: 1px solid lighten( $navOpenBackgroundColour, 5% );
+    color: $navLinkColour; 
+  }
+  li.current_page_item, li.current_page_parent{ // menu nav highlight class
+    color: $highlightBlue;
+    text-decoration: underline;
+  }   
+
+  .register{
+      font-weight: bold;
+      img{
+        vertical-align: middle;
+        margin-left: 5px;
+      }
+    }  
+}
+
+// prevents page scrolling when navigation is open (only scrolls as much as the navigation needs)
+.js-nav-active, .js-nav-active body{
+   // overflow: auto;
+   // height: 100%;
+   // width:100%;
+  @include breakpoint($nav) {
+   // overflow:visible;
+  }
+}
+
+
+// Non hamburger menu
+@include breakpoint($nav) {
+
+
+  .nav-toggle{ display:none;}
+
+  nav.main{
+    margin: 30px 0 0 0;
+    clear: left;
+    background: $navOpenBackgroundColour;
+
+    li{   
+      display:inline-block;
+      width:auto;
+    }
+
+    li.current_page_item a, li.current_page_parent a{ // menu nav highlight class
+      color: $highlightBlue;
+      text-decoration: underline;
+    }    
+    a{
+      color: $navLinkColour;
+      display: block;
+      //font sizes set in Typography
+    }
+
+    .register{
+      background: $bodyLinkColor;
+      display: block;
+      float: left;
+      padding: 0 1.5rem;
+      border-right: 1px solid #fff; 
+      margin-right: 1.5rem;   
+      font-weight: bold;
+
+      img{
+        width: 1.1rem;
+        vertical-align: middle;
+        margin-bottom:2px; 
+      }
+    }
+    @at-root .lt-ie9 nav.main .register{ // fixes nasty IE8 bug with arrow dropping on to 2nd line
+      padding: 0 !important;
+      width: 152px;
+    }
+  }
+  .js nav.main.closed {
+      max-height: none;
+  }
+
+}
+
+.lt-ie8 nav.main{ /* Hack to clear menu float in IE<7 */
+  float: left; width: 100%;
+}
+.lt-ie8 nav.main li{ /* Hack to enable inline block in IE<7 */
+    *display: inline;
+    zoom: 1;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+// speakers detail page
+.single-speakers{
+
+	@at-root .lt-ie9 .button img{
+		display: none;
+	}
+	main > aside{
+
+		img{
+				width: 50%;
+				margin:0 15px 15px 0;
+				display: block;
+				float: left;
+			@include breakpoint($small) {	
+				width: auto;
+				float: none;
+			}
+		}
+		h2{
+			color: $oceanGrey;
+		}
+		h2.jobTitle{
+			padding-bottom:0.6rem;
+			border-bottom: 1px solid $lightGrey;
+		}
+
+	}
+
+}
+
+// speakers listing page
+.page-template-page-speakers{
+
+	.keynoteBox{
+			background: $lightGrey;
+			color: $oceanGrey;
+			font-weight: bold;
+			padding: 3%;
+			width: 94%;
+			margin-bottom: 40px;
+			@include clearfix();
+			float: left; // IE8 likes this
+			img{
+				width: 8.7%;
+				min-width: 82px;
+				max-width: 146px;
+				margin: 0 5% 5% 0;
+				display: block;
+				float: left;
+			}	
+			.name{
+				margin: 0;
+			}
+			.jobTitle{
+				overflow: hidden;
+			}
+			.speakingAt, .bio, .jobTitle{
+				clear: left;
+			}	
+
+		@include breakpoint($medium) {			
+			img{				
+				margin-right: 3%;
+			}
+			.name, .leftCol{
+				float: left;
+				width: 39%;
+			}
+			.name, .keynote{
+				margin-bottom:0;
+				padding-bottom: 1rem;
+			}
+			.keynote, .rightCol{
+				float: left;
+				border-left: 1px solid $oceanGrey;
+				padding-left: 3%;
+				width: 39%;
+			}
+		}
+	}
+
+}

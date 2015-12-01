@@ -1,0 +1,102 @@
+.page-template-page-programme{
+	
+	ul.programme{
+			li{
+				border-top: 1px solid $midGrey;
+				color: $oceanGrey;
+				padding: .5rem 20px;
+				@include clearfix();
+				.close{
+					display: none;
+				}
+			}
+			li.active{
+				background: $lightGrey;
+				color: $blue;
+				.speakers{
+					display: none;
+				}
+				.close{
+					display: block;
+					color: $bodyLinkColor;
+					float: right;
+					img{
+						vertical-align: middle;
+					}
+				}
+				 @at-root .lt-ie9 ul.programme .close{ // fixes X dropping on to 2nd line
+				 	width: 90px;
+				 	text-align: right;
+				 }
+			}
+			li.workshop{
+				background: $lightBlue;
+			}
+			section{
+				display: none;		
+				width: 100%;
+				@include clearfix();
+				clear: left;
+			}
+
+			article p{ // this is naughty - should be in typography but font size not used anywhere else :S
+				font-size: 1.15rem; 
+				line-height: 1.8rem;   
+				margin-bottom: .5rem;
+				}
+
+	    @include breakpoint($medium) {	
+			time, .title, .speakers{
+				float: left;
+				margin: 0;
+				min-height: 1px; // prevents empty elements collapsing
+			}
+			time{
+				width: 12%;
+			}
+			.title{
+				width: 57%;
+			}
+			.speakers{
+				float: right;		
+				width: 29%;
+			}
+			section{
+					margin: 3rem 0 0 0;
+				article{
+					float: left;
+					margin: 0 0 0 12%;
+					width: 48%;
+					clear: left;
+					// /background: yellow;
+				}
+				aside{
+					float: right;
+					width: 35%;
+					//background: red;
+				}
+			}			
+		}
+	}
+
+}
+
+
+.single-programme{
+	    @include breakpoint($small) {	
+				article{
+					width: 49%;
+				}
+				aside{
+					width: 45%;
+				}
+		}
+	    @include breakpoint($medium) {	
+				article{
+					width: 59%;
+				}
+				aside{
+					width: 35%;
+				}
+		}
+}

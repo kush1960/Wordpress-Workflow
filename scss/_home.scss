@@ -1,0 +1,159 @@
+.page-template-page-home{
+
+	@include breakpoint($nav) {
+		.titleStrip{ 
+			display: none !important;
+		}
+	}
+
+	main{
+		@include breakpoint($small) {			
+			margin: 20px 0 40px 0;
+		}
+	}
+	.banner{
+			background-color: #4290dd;
+			width: 100%;
+			display: block;
+			position: relative;
+
+			.text{
+					padding: 25px;
+				@include breakpoint($small) {					
+					padding: 100px 25px 25px 25px;
+				}
+			}
+			p{
+				color: #fff;
+				font-weight: bold;				
+				margin: 0;
+			}
+			p.small{
+				margin: 0 0 3rem 0;
+			}
+
+			h1{
+				margin: 0 0 .75rem 0;
+			}
+			.strapline{
+				font-size: 1.5rem;
+				margin: 0 0 .75rem 0;
+				font-weight: normal;				
+			}
+
+		@include breakpoint($small) {	
+			background: url('img/homeBkg.jpg') no-repeat left bottom #6799c8;
+			background-size: cover;
+
+			.text{
+				width: 47%;
+				
+			}
+		@include breakpoint(500px) {	
+			background-position: center bottom;
+		}	
+		@include breakpoint(1050px) {	
+			background-position: right bottom;
+		}			
+		}
+	}
+
+	.badge{
+			border-radius: 50%;
+			width: 10rem;
+			transform: rotate(20deg);
+			position: absolute;
+			bottom: -4.6rem;
+			right: 0;
+			height: 7.5rem;
+			padding-top:2.5rem;
+			line-height: 1.25;		
+			color: $oceanGrey;
+			text-align: center;
+			background: #bde2f5;
+		@include breakpoint($small) {
+			top:6%;
+			bottom: auto;
+			right: 3%;
+		}		
+	}
+	.cornerTriangle{
+		position: absolute;
+		right: 0;
+		bottom: 0;	
+	}
+
+	article{
+			margin: 50px 0;		
+		@include breakpoint($small) {		
+			width:52%;
+			float: left;
+		}
+	}
+	aside{
+			margin: 25px 0;
+			background:$lightGrey;
+			& > div{
+				padding: 25px;
+			}
+			.viewAll{
+				text-align: right;
+				margin: 0;
+				padding: 15px 0 0 0;
+				border-top: 1px solid $midGrey;
+			}
+		@include breakpoint($small) {		
+			width: 42%;
+			float: right;
+		}
+	}
+
+	.sponsors{
+		clear: both;
+		padding: 20px 0;
+		border-top: 2px solid $lightGrey;
+		border-bottom: 2px solid $lightGrey;
+		.gallery-cell{
+			width: 146px;
+			margin-right:20px;
+		}
+		img{
+			width: 146px;
+			height:146px;
+		}
+		.flickity-prev-next-button{			
+		    background: #fff;
+		    height: 100%;
+		    top: 0;
+		    padding: 0;			
+		    left: auto;
+		    border-radius: 0;
+		    transform: none;
+		}
+		.flickity-prev-next-button.next{
+			right: 0;
+		}
+		.flickity-prev-next-button .arrow{
+			fill: $bodyLinkColor;
+		}
+	}
+}
+.lt-ie9 .sponsors{
+	width: 100%;
+	height: 146px;
+	float: left;
+	.flickity-prev-next-button{	
+		display: none;
+	}
+}
+.lt-ie8 .sponsors{
+	float: none;
+	height: auto;
+}
+.sponsors .gallery-cell{
+	float: left;
+}
+
+.lt-ie9 .banner{
+	margin:1px; // fixes bug that prevents banner from having 100% width 
+}

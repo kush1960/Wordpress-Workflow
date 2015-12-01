@@ -1,0 +1,152 @@
+
+h1, h2, h3, h4, h5, p, ul{
+	margin:0 0 1rem 0;	
+}
+
+
+p, ul{
+    font-size: 1.25rem;
+    line-height: 1.8rem;
+}
+
+p.small{ /* secondary paragraph size */
+    font-size: 1rem;
+    line-height: 1.5rem;   
+}
+li.title{ /* secondary paragraph size */
+        font-size: 12px;
+    @include breakpoint($nav) {
+        font-size: 1rem;
+        line-height: 1.5rem;   
+    }
+}
+
+nav.main a{ /* main Nav Bar */
+//        font-size: 1.15rem;    
+    @include breakpoint($nav) {
+        font-size: 1.6vw;
+        padding:1rem .6vw;
+        
+    }    
+    @include breakpoint($max) {
+        padding: 15px 16px;  
+        font-size: 20px;
+    }    
+}
+.lt-ie9 nav.main a{ // ie<9 doesnt under stand VW units
+    font-size: 16px !important;
+    padding: 15px 16px;  
+}
+
+.titleStrip *{ /* Breadcrumbs and site title */
+        font-size: 1.15rem;    
+    @include breakpoint($nav) {
+        font-size: 1.6vw;
+        font-weight: bold;
+        color: $blue;
+        line-height: 1.3;
+        
+    }    
+    @include breakpoint($max) {
+        font-size: 20px;
+    }    
+}
+.lt-ie9 .titleStrip *{ // ie<9 doesnt under stand VW units
+    font-size: 16px !important;
+}
+
+small{ /* Small print - used in footer */
+    font-size: 0.8rem;   
+    line-height: 1rem;       
+} 
+
+h1, h2, h3, h4, h5{
+    font-weight: bold;
+}
+
+h1{
+        font-size: 2.6rem;
+        line-height: 2.6rem;       
+        margin-bottom: 1.8rem;        
+}
+h2{
+    font-size: 1.25rem; 
+    line-height: 1.8rem;       
+    margin-bottom: .7rem;    
+    font-weight: bold;
+}
+h3, time{
+    font-size: 1.15rem; 
+    line-height: 1.3rem;       
+    margin-bottom: .5rem;    
+    font-weight: bold;
+}
+
+ul.list, article ul, article ol, .content ul, .content ol{ // make lists look like lists again
+	padding:0 0 0 3rem;
+    margin:0 0 1rem 0;
+	li{
+        margin:0 0 .3rem 0;
+        display:list-item;
+    }
+}
+
+.button{
+    padding:1.25rem 1.75rem;
+    background: $bodyLinkColor;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 10px;
+    display: inline-block;
+    img{
+            vertical-align: text-bottom;
+            margin-left: 5px;
+        @include breakpoint($max) {            
+            transform: translateY(-2px)
+        }    
+    }
+}
+
+.lt-ie9 .button{
+    // images in buttons drop to 2nd line if .button is inline-block this converluted hack fixes it
+    position: relative;
+    height: 16px;
+    img{  
+        position: absolute;
+        height: 16px;
+        background: $bodyLinkColor;
+        padding: 1.25rem 1.75rem 1.25rem 10px;
+        top: 0;
+    }
+} 
+hr { // A better looking default horizontal rule
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+
+
+html{ /* fonts are sized in REM to allow global shift in size at different breakpoints */
+        font-size: 14px;
+        //background:yellow;
+    @include breakpoint($small) {
+        font-size: 16px;
+        //background:pink;
+    }    
+    @include breakpoint($medium) {
+        font-size: 14px;
+        //background:brown;
+    }    
+    @include breakpoint($large) {
+        font-size: 16px;
+        //background:white;
+    }   
+    @include breakpoint($max) {
+        font-size: 18px;
+        //background:grey;
+    }                
+}

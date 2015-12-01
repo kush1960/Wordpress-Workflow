@@ -1,0 +1,75 @@
+.page-template-page-gettingHere{
+
+	.acf-map {
+		width: 100%;
+		height: 360px;
+		border: $lightGrey solid 1px;
+		margin: 20px 0;
+		background: url('http://maps.googleapis.com/maps/api/staticmap?autoscale=false&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xe12a01%7Clabel:1%7CThe+Vox+Conference+Centre&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7CThe+Vox+Conference+Centre+Resorts+World+Birmingham+United+Kingdom+B40+1NT');
+	}	
+
+
+	.hotels{
+		margin-bottom: 2rem;
+		.row{
+			border-bottom: 1px solid $lightGrey;
+			padding: 1rem .5rem;
+			@include clearfix();
+		}
+		.hotel, .telephone, .distance{
+				font-weight: bold;
+    		@include breakpoint($small) {				
+				float: left;
+				width:37%;
+				margin-left:1%;				
+			}
+		}
+		.telephone, .distance{
+				font-weight: normal;
+				margin-top: .25rem;
+				&:before{
+					content: "tel: ";
+					color: $oceanGrey;
+					text-align: right;
+					display: inline-block;
+					width: 5rem;
+					margin-right: 1rem;
+				}			
+    		@include breakpoint($small) {					
+    			margin-top: 0;
+				&:before{
+					content:"";
+					display: none;
+				}
+				color: $oceanGrey;
+				width:30%;
+			}
+		}
+		.distance{
+				&:before{
+					content:"distance: ";
+				}			
+    		@include breakpoint($small) {					
+				&:before{
+					content:"";
+				}
+			}
+		}		
+		.title{
+    			display: none;
+    		@include breakpoint($small) {		
+    			display: block;
+				background: $lightGrey;
+				*{
+					color: $blue;
+					font-weight: bold;
+				}
+			}
+		}
+	}	
+}
+
+
+.lt-ie9 .acf-map{
+	display: none; // hide map in ie<9 API not supported
+}
