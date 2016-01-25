@@ -1,0 +1,282 @@
+/*! Based on responsive-nav.main.js 1.0.39 by @viljamis */
+
+$navButtonBkgColour      : $bodyLinkColor;
+$navOpenBackgroundColour : $darkBlue;
+$navLinkColour           : #fff;
+$navCurrentLinkColour    : $bodyLinkColor;
+
+
+
+nav{
+
+    width: 100%;
+}   
+
+.opened {
+    max-height: 9999px;
+}
+
+nav ul{
+  font-size: 1.2rem;
+  margin: 0;
+  display: block;
+  list-style: none;   
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+nav.subNav{
+  a{color: #fff;}
+  .pageTitle{
+    display: none;
+  }
+}
+
+
+/* Nav button - injected by JS */
+
+.nav-toggle {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-decoration: none;
+  margin:0;
+  display: block;
+  text-align: center;  
+ padding: 1rem 0;
+}
+.nav-toggle:last-of-type{ // targets the submenu nav-toggle only
+  border-bottom: 1px dotted lighten( $darkBlue, 7% );
+  background: $darkBlue;
+  color: #fff;
+}
+.nav-toggle .linkButton{
+  vertical-align: middle;
+  width: .8rem;
+}
+.nav-toggle:hover, nav:not(.pagination) a:hover{ background-color: darken( $darkBlue, 3% );}
+
+.js nav ul.closed{
+    display:none;
+  @include breakpoint($nav) {
+    display:block;
+  }  
+}
+
+// Hamburger menu (opened)
+.js nav ul.opened{
+    position: absolute;
+    z-index: 98;
+
+  li{
+    background: $navOpenBackgroundColour;    
+  }
+  a{
+    display: block;
+    padding: 15px 1rem;
+    border-bottom: 1px solid lighten( $navOpenBackgroundColour, 5% );
+    color: $navLinkColour; 
+  }
+  ul a{
+    padding-left:2.5rem;
+  }
+  li.current-menu-item a{ // menu nav highlight class
+    text-decoration: underline;
+  }   
+
+}
+
+
+
+
+// Non hamburger menu
+@include breakpoint($nav) {
+
+  
+  .nav-toggle{ display:none;}
+
+  .mainNav{// rqd for css only drop downs
+    z-index: 99;
+    position: relative; 
+  }
+  .mainNav li.menu-item-has-children > a:after, .mainNav > ul > li:first-of-type a:after {
+    content: ' ';
+    background:url("img/icon-dropDownArrow.svg") no-repeat;
+    width: 14px;
+    height: 10px;
+    margin: 0 0 -1px 2px;
+    display: inline-block;
+    background-size: contain;
+    cursor: pointer;
+  }
+  .campaign .mainNav > ul > li:first-of-type a:after{ // hide the down arrow for 1st item whn in campaigns
+    content: none;
+  }  
+  nav ul, .js nav ul.opened{
+    font-size: 1rem;
+    position: static;
+    max-width: $pageWidth;
+    padding: 0 $pageGutter;
+    margin: auto;
+    background: #fff;    
+    li{   
+      background: none;
+      padding: 0;
+      display:inline-block;
+      width:auto;
+      position: relative;
+      margin: 0 1.25rem 0 0;
+      border-bottom: .5rem solid #fff;      
+    }
+   
+    a{
+      color: $darkBlue;
+      font-weight: bold;
+      border: none;
+      display: inline-block;
+      padding: 1rem 0 .5rem 0;
+      //font sizes set in Typography
+
+    }
+  }
+
+  nav.mainNav li:hover, nav.mainNav li.current-menu-item, nav.mainNav li.current-page-ancestor{
+        background: none;
+        border-color: $darkBlue;
+  }
+
+  nav.mainNav a:hover{
+        background: none;
+  }    
+
+  nav.subNav{
+    background: $darkBlue;
+  }
+
+  nav.subNav ul{
+    display: inline-block;
+    background: none;
+    .pageTitle{
+      @include breakpoint(900px) {      
+        display: inline-block;      
+        transform: translateY(.1rem);
+        font-weight: normal;
+        text-transform: none;
+        color: #fff;
+        margin-bottom: 0;
+        padding: 1rem 0;
+        line-height: 0;
+      }
+    }
+    li.current_page_item a, li.current_page_parent a, li.current-cat a{ // menu nav highlight class
+      font-weight: bold;
+    }      
+    li.current_page_item a:hover{ // menu nav highlight class
+      background: none;
+      cursor: default;
+    } 
+    li{
+      border: none;
+      margin: 0;
+    }     
+    a{
+      color: #fff;
+      font-weight: normal;
+      padding: 1rem .75rem;
+    }
+  }
+  .js nav ul.closed,{
+      max-height: none;
+  }   
+
+}
+
+
+
+/* MEGA MENU FOR TYRE SAFETY INFORMATION SECTION (and std sub menu dropdowns) */
+    .tyreSafetyMegaMenu{
+      display: none;
+    }
+@include breakpoint($nav) {  
+    .tyreSafetyMegaMenu, .sub-menu{
+      @include clearfix();
+    //  z-index:99;
+      box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.1);
+      display: block;
+      opacity: 0;  
+      background: #fff;
+      color: #000;
+      width: 94%;
+      max-width: $contentWidth;
+      position: absolute;
+      margin-left: $pageGutter;
+      padding: 2rem 3.75rem;
+      & > div{
+        float: left;
+        width: 30%;
+        margin-right: 5%;
+      }
+      & > div:last-of-type{
+        margin-right: 0; 
+      }
+
+      a, strong{
+        font-size: 1rem;
+        display: block;
+        color: $navOpenBackgroundColour;
+        border-bottom: 1px solid #aecacf;
+        padding: .5rem 0;
+      }
+      strong{
+        color: $headingColor;
+      }  
+      li:last-of-type a{
+        border: 0;
+      }
+      a:hover{
+        text-decoration: underline;
+      }
+      transform: translate(0, -100%);
+      -ms-transform: translate(0, -100%);  
+      transition:transform 0.2803s ease-in-out, opacity .25s cubic-bezier(1.000, 0.745, 0.580, 0.995);
+      -ms-transition:transform 0.2803s ease-in-out, opacity .25s cubic-bezier(1.000, 0.745, 0.580, 0.995);
+    }
+    .sub-menu{
+      padding:1rem;
+      margin: 0;        
+      min-width: 15rem;          
+      z-index: -1;
+      width: auto;
+      li{
+        white-space: nowrap;
+        display: block;
+        border: none;
+        margin: 0;
+      }
+      a{
+        font-weight: 600;
+        display: block;
+      }
+
+    }
+    .tyreSafetyMegaMenu.showMM{      
+      opacity: .97;
+      z-index: 90;
+      transform: translate(0, 0);
+      -ms-transform: translate(0, 0);    
+    }
+    .mainNav li:hover .sub-menu{
+      display: block;  
+      opacity: .97;
+      transform: translate(0, 0);
+      -ms-transform: translate(0, 0);    
+      transition-delay: .35s; 
+    }  
+}

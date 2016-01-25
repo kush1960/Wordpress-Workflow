@@ -1,47 +1,25 @@
 <?php
-/*************************************************************************
-* General settings
-*************************************************************************/
-
-/* Disabled WP version number from showing */
-function complete_version_removal() {
-    return '';
-}
-add_filter('the_generator', 'complete_version_removal');
-
-show_admin_bar(false);
- 
-// Required for IE9 to play nice with ACF with the WordPress admin area.
-//add_theme_support( 'post-thumbnails');
-
-/* Custom logo on admin login */
-function custom_login_logo() {
-    echo '<style>h1 a { background-image:url('.get_bloginfo('template_directory').'/images/logo-admin.jpg) !important; background-size: 320px 100px !important; height: 100px !important; width: 320px !important; }</style>';
-}
-add_action('login_head', 'custom_login_logo');
-
-/* Override link for custom wp-login image */
-function wp_login_logo_link() {
-    return get_site_url();
-}
-add_filter( 'login_headerurl', 'wp_login_logo_link' );
-
-/* Hide admin bar */
-add_filter('show_admin_bar', '__return_false');
 
 
 /*************************************************************************
-* Include Files
-*************************************************************************/
+* Image sizes and config
+/*************************************************************************
 
-include_once 'includes/form_helper.php';
+/* Enable featured image */
+add_theme_support( 'post-thumbnails' );
+
+
+/* custom images sizes */
+//add_image_size( 'test', 333, 333, true );
+
+
 
 /*************************************************************************
-* Add page specific js
+* Enque Javascript
 *************************************************************************/
 
 /**
- * Adds additional js include files on a per page basis
+ * Optional - Add additional js include files on a per page basis
  *
  * e.g.
  *
@@ -60,15 +38,57 @@ function javascript()
     if( !is_admin() )
     { 
         global $wp_query;
-
-
         wp_enqueue_script('main', get_template_directory_uri() .'/js/main.js','','',true); // all scripts are combined in a single JS
-
-
-
-   }
+    }
 }
 add_action('wp_enqueue_scripts', 'javascript');
+
+
+
+/*************************************************************************
+* Register Custom Post Types
+*************************************************************************/
+
+function create_caseStudy_cpt() 
+{
+    $labels = array(
+        'name'                  => 'Case Studies',
+        'singular_name'         => 'Case Study',
+        'add_new'               => 'Add Case Study',
+        'add_new_item'          => 'Add New Case Study',
+        'edit_item'             => 'Edit Case Study',
+        'new_item'              => 'New Case Study',
+        'all_items'             => 'View all Case Studies',
+        'view_item'             => 'View Case Studies',
+        'search_items'          => 'Search Case Studies',
+        'not_found'             => 'No Case Studies found',
+        'not_found_in_trash'    => 'No Case Studies found in Trash',
+        'parent_item_colon'     => '',
+        'hierarchical'          => false,
+        'menu_name'             => 'Case Studies'
+    );
+
+    $args = array(
+        'labels'                => $labels,
+        'public'                => true,
+        'exclude_from_search'   => false,
+        'show_in_admin_bar'     => false,
+        'show_in_nav_menus'     => false,
+        'has_archive'           => true,
+        'publicly_queryable'    => true,
+        'query_var'             => false,
+        'taxonomies'            => array() , 
+        'supports'              => array( 'title' , 'editor', 'page-attributes'),
+        'rewrite'               => array(
+                                    'slug' => 'other-information/case-studies',
+                                    'with_front' => false
+                                   )        
+    );
+
+    register_post_type('casestudies-cpt', $args);
+}
+add_action('init', 'create_caseStudy_cpt');
+
 
 
 
@@ -109,67 +129,14 @@ add_action( 'init', 'revcon_change_post_object' );
 
 
 /*************************************************************************
-* Register Custom Post Types
-*************************************************************************/
-
-function create_example_cpt() 
-{
-    $labels = array(
-        'name'                  => 'Example CPT',
-        'singular_name'         => 'Example CPT',
-        'add_new'               => 'Add Example CPT',
-        'add_new_item'          => 'Add New Example CPT',
-        'edit_item'             => 'Edit Example CPT',
-        'new_item'              => 'New Example CPT',
-        'all_items'             => 'All Example CPTs',
-        'view_item'             => 'View Example CPTs',
-        'search_items'          => 'Search Example CPTs',
-        'not_found'             => 'No Example CPTs found',
-        'not_found_in_trash'    => 'No Example CPTs found in Trash',
-        'parent_item_colon'     => '',
-        'menu_name'             => 'Example CPT'
-    );
-
-    $args = array(
-        'labels'                => $labels,
-        'public'                => true,
-        'exclude_from_search'   => false,
-        'show_in_admin_bar'     => false,
-        'show_in_nav_menus'     => false,
-        'publicly_queryable'    => true,
-        'query_var'             => false,
-        'taxonomies'            => array('category', 'post_tag') , 
-        'supports'              => array( 'title' , 'editor' )
-    );
-
-    register_post_type('example-cpt', $args);
-}
-add_action('init', 'create_example_cpt');
-
-
-
-
-/*************************************************************************
-* Add custom image sizes
-*************************************************************************/
-
-
-//add_image_size( 'sample', 200, 200, true );
-
-
-/*************************************************************************
 * WYSIWYG stuff
 *************************************************************************/
 
-
-// add custom editor styles - adding main Stylesheet. Possibly too much bloat?
+// add custom front end styles to WYSIWYG - this adds main Stylesheet. Possibly too much bloat?
 add_editor_style('style.css');
 
-
-
-
-
-// add  custom classes to WYSIWYG editor
+// add custom classes to WYSIWYG editor
+/*
 function wpb_mce_buttons_2($buttons) {
     array_unshift($buttons, 'styleselect');
     return $buttons;
@@ -177,11 +144,7 @@ function wpb_mce_buttons_2($buttons) {
 add_filter('mce_buttons_2', 'wpb_mce_buttons_2');
 
 
-
-/*
-* Callback function to filter the MCE settings
-*/
-
+// Callback function to filter the MCE settings
 function my_mce_before_init_insert_formats( $init_array ) {  
 
 // Define the style_formats array
@@ -202,6 +165,24 @@ function my_mce_before_init_insert_formats( $init_array ) {
 } 
 // Attach callback to 'tiny_mce_before_init' 
 add_filter( 'tiny_mce_before_init', 'my_mce_before_init_insert_formats' ); 
+*/
+
+/*************************************************************************
+* Register custom menus
+*************************************************************************/
+
+/*
+function register_my_menus() {
+  register_nav_menus(
+    array(
+      'mainNav' => __( 'Main Navigation' ),
+      'sideBar' => __( 'Sidebar Navigation' ),
+    )
+  );
+}
+add_action( 'init', 'register_my_menus' );
+*/
+
 
 
 /*************************************************************************
@@ -211,10 +192,10 @@ add_filter( 'tiny_mce_before_init', 'my_mce_before_init_insert_formats' );
 function remove_stuff ()      //creating functions post_remove for removing menu item
 { 
  //  remove_menu_page('edit.php');
- //  remove_menu_page('edit-comments.php');
+   remove_menu_page('edit-comments.php');
 }
 
-// add_action('admin_menu', 'remove_stuff');   //adding action for triggering function call
+add_action('admin_menu', 'remove_stuff');   //adding action for triggering function call
 
 
 /*************************************************************************
@@ -249,3 +230,23 @@ function is_ancestor( $post_id )
         return false;
     }
 }
+
+
+
+/*************************************************************************
+* Misc settings
+*************************************************************************/
+
+/* Disabled WP version number from showing - makes it harder for hackers to find version number */
+function complete_version_removal() {
+    return '';
+}
+add_filter('the_generator', 'complete_version_removal');
+
+show_admin_bar(false);
+ 
+
+/* Hide admin bar */
+add_filter('show_admin_bar', '__return_false');
+
+

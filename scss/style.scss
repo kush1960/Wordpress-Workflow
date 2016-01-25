@@ -1,16 +1,10 @@
 // PROJECT VARIABLES
 
-//$bodyFont : "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-$bodyFont : "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$bodyFont : "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 
 $blue			: #00294f;
 $bodyTextColor	: $blue;
 $bodyLinkColor 	: #0066cc;
-$highlightBlue	: #bde2f5;
-$lightBlue		: #f1fcfc;
-$midGrey		: #e0e0e0;
-$lightGrey		: #ebebeb;
-$oceanGrey		: #5c6a7d;
 
 $pageWidth		: 1300px;
 
@@ -34,15 +28,8 @@ $max:	  1300px;
 // PARTIALS - Include for each component or page
 
 @import "global";			// common styles
-@import "flickity";			// Flickity slider styles
-@import "responsiveNav";	// burger nav and desktop menu styles
+@import "navigation";		// burger nav and desktop menu styles
 @import "typography";		// reusable font styles
 @import "wysiwygRules";		// wysiwyg rules
-@import "speakerBox";		// .speakerBox template-part
-@import "speakers";			// speakers listing and detail page
-@import "programme";		// programme listing
-@import "home";				// home
-@import "about";			// about
-@import "gettingHere";		// getting here
 
 

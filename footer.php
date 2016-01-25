@@ -1,5 +1,5 @@
 
-	<footer>
+	<footer class="page">
            
         <small>
             &copy; Project Name

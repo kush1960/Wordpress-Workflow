@@ -3,7 +3,7 @@
 
 // Project Settings
 
-var domain = "radiotherapyconference.dev.co.uk";
+var domain = "??????.dev.co.uk";
 
 
 var gulp         = require('gulp');
@@ -120,7 +120,7 @@ gulp.task('generateScripts', function() {
 
 // There's a bug with this.... Because the tasks run asynchronously Build needs to be run 3 times to generate main.js
 // Run 1 - creates Responsive nav in plugin folder
-// Run 2 - creates plugins.js
+// Run 2 - creates 0plugins.js (0 prefix required to ensure it's the first to be included in the main.js file)
 // Run 3 - creates main.js
 
 
