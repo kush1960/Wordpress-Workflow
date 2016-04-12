@@ -17,9 +17,9 @@ Modernizr
 
 ## Installing
 
-Checkout repo
+Checkout repo into the wp-content/themes/ folder
 ```
-git clone https://github.com/djkush/workflow.git <project-name>
+git clone https://github.com/kush1960/Wordpress-Workflow.git <theme-name>
 ```
 Install development dependencies with NPM
 ```
