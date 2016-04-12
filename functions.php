@@ -1,5 +1,7 @@
 <?php
 
+// Stick anything verbose in here to keep this file nice and clean
+include_once('includes/customFunctions.php');
 
 /*************************************************************************
 * Image sizes and config
@@ -37,11 +39,17 @@ function javascript()
     // Check that we are viewing a frontend page
     if( !is_admin() )
     { 
-        global $wp_query;
-        wp_enqueue_script('main', get_template_directory_uri() .'/js/main.js','','',true); // all scripts are combined in a single JS
+        // Deregister then re-register script to enque jquery at bottom of page
+        // This is better for performance but could break some plugins
+        wp_deregister_script( 'jquery' );
+        wp_register_script( 'jquery', includes_url( '/js/jquery/jquery.js' ), false, NULL, true );
+        wp_enqueue_script( 'jquery' );
+
+        wp_enqueue_script('main', get_template_directory_uri() .'/js/main.js', array('jquery'), '', true); // all scripts are combined in a single JS
     }
 }
 add_action('wp_enqueue_scripts', 'javascript');
+
 
 
 
@@ -126,6 +134,22 @@ function revcon_change_post_object() {
 add_action( 'admin_menu', 'revcon_change_post_label' );
 add_action( 'init', 'revcon_change_post_object' );
 
+
+/*************************************************************************
+* YOAST tweaks
+*************************************************************************/
+
+// Remove YOAST sidebar - it's annoying and not that useful
+function remove_yoast_metabox_sidebar(){
+    remove_meta_box('wpseo_meta', 'sidebar-banners-cpt', 'normal');
+}
+add_action( 'add_meta_boxes', 'remove_yoast_metabox_sidebar',11 );
+
+// Move Yoast metabox to bottom in admin
+function yoasttobottom() {
+    return 'low';
+}
+add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
 
 
 /*************************************************************************

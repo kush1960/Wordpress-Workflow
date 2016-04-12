@@ -15,7 +15,7 @@ get_header(); ?>
 
 	
 	<?php endwhile; else: ?>
-		<p>Sorry, no posts matched your criteria.</p>
+		<p><?php _e("Sorry, no posts matched your criteria.", "bshf"); ?></p>
 	<?php endif; ?>
 </main>
 <?php get_footer(); ?>
