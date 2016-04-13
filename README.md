@@ -1,6 +1,6 @@
-# workflow
+# Wordpress Workflow
 
-Skeleton project for web development.
+Skeleton project for Wordpress web development.
 
 Includes Gulp for...
 
@@ -31,6 +31,7 @@ Install development dependencies with NPM
 npm install
 ```
 (**Note** Bower is optional - edit `style.scss` and `header.php` if you don't want to use it)
+
 Install front end dependencies with Bower 
 ```
 bower install
