@@ -3,19 +3,31 @@
 Skeleton project for web development.
 
 Includes Gulp for...
+
 SCSS compiling
+
 Automatically adding vendor prefixes to CSS
+
 Concatinating JS to minimise server requests
+
 Linting Javascript errrors
+
 Minifying CSS
+
 Browser Sync
 
 Includes Bower for...
+
 Rebase - custom CSS reset/SASS defaults
+
 Old-IE-Fixes - Fixes issues with IE < 9 Comprises of a number of hacks/shims from other developers.
+
 Responsive-nav - lightweight burger nav http://responsive-nav.com/
+
 Modernizr - duh!
+
 Breakpoint-sass - Nice way of hangling media queries - http://breakpoint-sass.com/
+
 
 ## Installing
 
