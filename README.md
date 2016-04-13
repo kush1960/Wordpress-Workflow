@@ -30,7 +30,8 @@ Install development dependencies with NPM
 ```
 npm install
 ```
-Install front end dependencies with Bower (optional - edit `style.scss` and `header.php` if you don't want this)
+(**Note** Bower is optional - edit `style.scss` and `header.php` if you don't want to use it)
+Install front end dependencies with Bower 
 ```
 bower install
 ```
