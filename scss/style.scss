@@ -3,7 +3,7 @@
 $bodyFont : "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 
 $blue			: #00294f;
-$bodyTextColor	: $blue;
+$bodyTextColor	: darkgrey;
 $bodyLinkColor 	: #0066cc;
 
 $pageWidth		: 1300px;
@@ -28,7 +28,7 @@ $max:	  1300px;
 // PARTIALS - Include for each component or page
 
 @import "global";			// common styles
-@import "navigation";		// burger nav and desktop menu styles
+//@import "navigation";		// burger nav and desktop menu styles
 @import "typography";		// reusable font styles
 @import "wysiwygRules";		// wysiwyg rules
 

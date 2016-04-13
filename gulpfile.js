@@ -1,145 +1,98 @@
-// Based on markgoodyear.com/2014/01/getting-started-with-gulp/ with additions for BrowserSync
+// ------------------------------------------------- configs
+var paths = {
+  sass: {
+    src: './scss/*.{scss,sass}',
+    dest: './'
+  },
+  jsplugins: {
+    src: 'js/dev/plugins/*.js',
+    dest: 'js/dev'
+  },
+  jsscripts: {
+    src: 'js/dev/*.js',
+    dest: 'js'
+  }    
+};
+
+var domain = "workflow.dev.co.uk";
 
 
-// Project Settings
 
-var domain = "??????.dev.co.uk";
+// ------------------------------------------------ requires
+var gulp = require('gulp'),
+    sass = require('gulp-sass'),
+    browserSync  = require('browser-sync'),
+    autoprefixer = require('gulp-autoprefixer'),
+    cssnano = require('gulp-cssnano'),
+    rename  = require('gulp-rename'),
+    concat  = require('gulp-concat'),
+    uglify  = require('gulp-uglify'),
+    jshint  = require('gulp-jshint');
 
-
-var gulp         = require('gulp');
-var browserSync  = require('browser-sync').create();
-var sass         = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var minifycss    = require('gulp-minify-css');
-var rename 		 = require('gulp-rename');
-var notify       = require('gulp-notify');
-var jshint       = require('gulp-jshint');
-var uglify       = require('gulp-uglify');
-var concat       = require('gulp-concat');
-var cache        = require('gulp-cache');
-var imagemin     = require('gulp-imagemin');
-var svg2png      = require('gulp-svg2png');
-
-// Proxy Server + watching scss/html files
-gulp.task('watch', ['sass'], function() {
-
-    browserSync.init({
-    	files: "*.css",
-        proxy: domain,
-       // tunnel: "cite", // use external domain (can be buggy)
-        open: false, // stop browserSync from opening new browser tab
-        online: true // change this to false if you want to speed up browserSync (prevents access from other machines)
-    });    
-
-    gulp.watch("scss/*.scss", ['sass']);
-   
-    gulp.watch("*.php").on('change', browserSync.reload);
-
-    gulp.watch('js/dev/**/*.js', ['scripts']); // watch scripts dev folder and compress/move/etc if changes    
-    gulp.watch(['js/*.js']).on('change', browserSync.reload); // reload browser if new js appears
-
-   
-    gulp.watch('img/dev/*', ['images']); // Watch image files and compress if changed
-    gulp.watch(['img/*']).on('change', browserSync.reload); // reload browser if new imgs appear
-
-});
-
-gulp.task('clear', function (done) {
-  return cache.clearAll(done);
+// ---------------------------------------------- Gulp Task - CSS
+gulp.task('sass', function () {
+  return gulp.src(paths.sass.src)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer('last 2 version'))
+    .pipe(gulp.dest(paths.sass.dest))
+    .pipe(browserSync.reload({stream: true}))
+    .pipe(rename({ suffix: '.min' }))
+        .pipe(cssnano())
+        .pipe(gulp.dest(paths.sass.dest))  
 });
 
 
-// Compile sass into CSS & auto-inject into browsers
-gulp.task('sass', function() {
-    return gulp.src("scss/style.scss")
-        .pipe(sass())
-        .on('error', onError)
-        .pipe(autoprefixer('last 2 version'))
-        .pipe(gulp.dest(""))
-        .pipe(rename({ suffix: '.min' }))
-  		.pipe(minifycss())
-		.pipe(gulp.dest(""))
-        .pipe(browserSync.stream())		
-        .pipe(notify({ message: 'SASS task complete' }));        
+// ---------------------------------------------- Gulp Task - JS Plugins combine
+gulp.task('plugins', function() {
+  return gulp.src(paths.jsplugins.src)
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(concat('plugins.js'))
+    .pipe(gulp.dest(paths.jsplugins.dest));
 });
 
 
-function onError(err) {
-  console.log(err);
-  this.emit('end');
-}
-
-
-// Custom JS Scripts
+// ---------------------------------------------- Gulp Task - combine all JS into  one file
 gulp.task('scripts', function() {
-
-    // merge, minify, lint and move any JS in the dev folder
-    return gulp.src('js/dev/*.js')
+  return gulp.src(['js/dev/plugins.js',paths.jsscripts.src])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(concat('main.js'))
-    .pipe(gulp.dest('js'))
+    .pipe(gulp.dest(paths.jsscripts.dest))
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
-    .pipe(gulp.dest('js'));
+    .pipe(gulp.dest(paths.jsscripts.dest));
+});
+
+
+// ---------------------------------------------- Gulp Task - Browser Sync
+gulp.task('browser-sync', function () {
+  return browserSync({
+    open: false,
+    files: "*.css",
+    proxy: domain
+  });
 });
 
 
 
-// Generate scripts task
-gulp.task('generateScripts', function() {
 
-    // move and compress Old IE Fixes
-    gulp.src('bower_components/Old-IE-Fixes/IE7-8Fixes.js')
-    .pipe(notify({ title: 'Adding project dependencies...', message: '' }))
-    .pipe(gulp.dest('js'))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(uglify())
-    .pipe(gulp.dest('js'))
-    .pipe(notify({ title: 'Adding project dependencies...', message: 'IE7-8 fixes added' }));
 
-    // move Jquery to JS folder
-    gulp.src('bower_components/jquery/dist/jquery.min.js')
-    .pipe(gulp.dest('js'))
-    .pipe(notify({ title: 'Adding project dependencies...', message: 'jQuery CDN fallback' }));
-
-    // move Responsive Nav to JS/dev/plugins folder
-    gulp.src('bower_components/responsive-nav/responsive-nav.js')
-    .pipe(gulp.dest('js/dev/plugins/'))
-    .pipe(notify({ title: 'Adding project dependencies...', message: 'Responsive Nav' }));
-
-    // Combine plugins and custom JS 
-    gulp.src('js/dev/plugins/*.js')
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(concat('0plugins.js'))
-    .pipe(gulp.dest('js/dev'))
-    .pipe(notify({ title: 'Adding project dependencies...', message: 'Plugins & custom JS generated in main.js'  }));
-
+// ------------------------------------ Gulp Testing Message
+gulp.task('message', function(){
+  console.log('It works!!');
 });
 
-// There's a bug with this.... Because the tasks run asynchronously Build needs to be run 3 times to generate main.js
-// Run 1 - creates Responsive nav in plugin folder
-// Run 2 - creates 0plugins.js (0 prefix required to ensure it's the first to be included in the main.js file)
-// Run 3 - creates main.js
-
-
-// Images
-gulp.task('images', function() {
-
-  gulp.src('img/dev/**/*.svg')
-    .pipe(svg2png())
-    .pipe(gulp.dest('img'));
-
-  return gulp.src('img/dev/**/*')
-    .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
-    .pipe(gulp.dest('img'))
-    .pipe(notify({ message: 'Images task complete' }));
+// ---------------------------------------------- Gulp Watch
+gulp.task('watch:styles', function () {
+  gulp.watch(paths.sass.src, gulp.series('sass'));
 });
-
-
-
-// Build Task
-gulp.task('build', ['generateScripts'], function() {
-    gulp.start('sass', 'images', 'scripts');
+gulp.task('watch:plugins', function () {
+  gulp.watch(paths.jsplugins.src, gulp.series('plugins'));
 });
+gulp.task('watch:scripts', function () {
+  gulp.watch(paths.jsscripts.src, gulp.series('scripts'));
+});
+gulp.task('watch', gulp.series('sass',
+  gulp.parallel('browser-sync','watch:styles','watch:plugins','watch:scripts')
+));
