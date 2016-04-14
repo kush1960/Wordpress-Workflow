@@ -4,7 +4,8 @@
   "description": "Bare bones workflow for web development. Includes SCSS compiling / Browser Sync / Minifying",
   "main": "index.html",
   "scripts": {
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "minify": "gulp minify"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "gulp-jshint": "^1.11.2",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.2.0",
     "jshint-stylish": "^2.0.1"
   }

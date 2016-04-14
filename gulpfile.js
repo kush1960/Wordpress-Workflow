@@ -27,18 +27,18 @@ var gulp = require('gulp'),
     rename  = require('gulp-rename'),
     concat  = require('gulp-concat'),
     uglify  = require('gulp-uglify'),
-    jshint  = require('gulp-jshint');
+    jshint  = require('gulp-jshint'),
+    sourcemaps  = require('gulp-sourcemaps');
 
 // ---------------------------------------------- Gulp Task - CSS
-gulp.task('sass', function () {
+gulp.task('sass', function() {
   return gulp.src(paths.sass.src)
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer('last 2 version'))
+    .pipe(sourcemaps.write(paths.sass.dest))
     .pipe(gulp.dest(paths.sass.dest))
     .pipe(browserSync.reload({stream: true}))
-    .pipe(rename({ suffix: '.min' }))
-        .pipe(cssnano())
-        .pipe(gulp.dest(paths.sass.dest))  
 });
 
 
@@ -59,9 +59,24 @@ gulp.task('scripts', function() {
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(concat('main.js'))
     .pipe(gulp.dest(paths.jsscripts.dest))
+});
+
+
+// ---------------------------------------------- Gulp Task - Minify CSS/JS
+gulp.task('minify', function() {
+   console.log('WARNING - This task minifies existing main.js and style.css - it does not compile');
+
+   // JS
+   gulp.src(['js/main.js'])
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
     .pipe(gulp.dest(paths.jsscripts.dest));
+
+    // CSS
+  return gulp.src(['style.css'])
+    .pipe(rename({ suffix: '.min' }))
+        .pipe(cssnano())
+        .pipe(gulp.dest(paths.sass.dest))  
 });
 
 
