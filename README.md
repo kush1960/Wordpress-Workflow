@@ -52,4 +52,12 @@ When working with Javascript follow the simple rules...
 1. Put all plugins in the `js/dev/plugins` folder.
 2. Put all custom scripts in the `js/dev` folder.
 
-Gulp will combine all JS in to `main.js` and  `main.min.js`
+Gulp will combine all JS in to `main.js` 
+
+### Generating minified versions
+
+At the end of a project you may want to minif your CSS/JS. Simply run
+```
+npm run minify
+```
+This will create `js/main.min.js` and `style.min.css`. It will only minify your existing CSS/JS - *it will not recompile anything*. 
