@@ -9,13 +9,13 @@ Includes Gulp for...
 * Concatinating JS to minimise server requests
 * Linting Javascript errrors
 * Minifying CSS
-* Browser Sync
+* Browser Sync - https://www.browsersync.io/
 
-Includes Bower for...
+(Optionally) Includes Bower for...
 
-* Rebase - custom CSS reset/SASS defaults
-* Old-IE-Fixes - Fixes issues with IE < 9 Comprises of a number of hacks/shims from other developers.
-* Responsive-nav - lightweight burger nav http://responsive-nav.com/
+* Rebase - custom CSS reset/SASS defaults - https://gist.github.com/kush1960/f7a197adff86558d1451
+* Old-IE-Fixes - Fixes issues with IE < 9 Comprises of a number of hacks/shims from other developers - https://github.com/kush1960/Old-IE-Fixes
+* Responsive-nav - lightweight burger nav - http://responsive-nav.com/
 * Modernizr - duh!
 * Breakpoint-sass - Nice way of hangling media queries - http://breakpoint-sass.com/
 
@@ -30,7 +30,7 @@ Install development dependencies with NPM
 ```
 npm install
 ```
-(**Note** Bower is optional - edit `style.scss` and `header.php` if you don't want to use it)
+(**Note** Bower is optional - just remove lines from `style.scss` and `header.php` if you don't want to use it)
 
 Install front end dependencies with Bower 
 ```
