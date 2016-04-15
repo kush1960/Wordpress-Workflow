@@ -10,6 +10,7 @@ Includes Gulp for...
 * Linting Javascript errrors
 * Minifying CSS
 * Browser Sync - https://www.browsersync.io/
+* CSS sourcemaps (finally!)
 
 (Optionally) Includes Bower for...
 
