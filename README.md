@@ -6,11 +6,11 @@ Includes Gulp for...
 
 * SCSS compiling
 * Automatically adding vendor prefixes to CSS
-* Concatinating JS to minimise server requests
+* Concatinating JS to minimise server requests and allow dev js to be seperated in to multiple files for modularity 
 * Linting Javascript errrors
 * Minifying CSS
 * Browser Sync - https://www.browsersync.io/
-* CSS sourcemaps (finally!)
+* CSS sourcemaps
 
 (Optionally) Includes Bower for...
 
@@ -18,7 +18,7 @@ Includes Gulp for...
 * Old-IE-Fixes - Fixes issues with IE < 9 Comprises of a number of hacks/shims from other developers - https://github.com/kush1960/Old-IE-Fixes
 * Responsive-nav - lightweight burger nav - http://responsive-nav.com/
 * Modernizr - duh!
-* Breakpoint-sass - Nice way of hangling media queries - http://breakpoint-sass.com/
+* Breakpoint-sass - Nice way of handling media queries - http://breakpoint-sass.com/
 
 
 ## Installing
