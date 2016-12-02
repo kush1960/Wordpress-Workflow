@@ -52,6 +52,7 @@ When working with Javascript follow the simple rules...
 
 1. Put all plugins in the `js/dev/plugins` folder.
 2. Put all custom scripts in the `js/dev` folder.
+3. Prefix your files with numbers if you need to ensure something is loaded before something else.
 
 Gulp will combine all JS in to `main.js` 
 

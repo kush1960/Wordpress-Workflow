@@ -10,7 +10,6 @@ include_once('includes/registerCPTs.php');
 include_once('includes/customFunctions.php');
 
 
-
 /*************************************************************************
 * Enque Javascript
 *************************************************************************/

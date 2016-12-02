@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "modernizr-min": "~2.8.3",
+    "modernizr": "~3.3.1",
     "Old-IE-Fixes": "*",
     "rebase-reset-scss": "https://gist.github.com/f7a197adff86558d1451.git",
     "responsive-nav": "~1.0.39",

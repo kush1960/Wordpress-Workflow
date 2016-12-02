@@ -14,7 +14,7 @@
 
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
 	
-	<!-- <script src="<?php bloginfo('template_directory'); ?>/bower_components/modernizr-min/modernizr.min.js"></script>  possibly not needed - replace this with a custom Modernizr build on production projects and point to JS folder -->
+	<!-- <script src="<?php bloginfo('template_directory'); ?>/bower_components/modernizr/src/Modernizr.js"></script>  possibly not needed - replace this with a custom Modernizr build on production projects and point to JS folder -->
     <!--[if lt IE 9]><script src="<?php bloginfo('template_directory'); ?>/js/IE7-8Fixes.min.js"></script><![endif]-->
 
 

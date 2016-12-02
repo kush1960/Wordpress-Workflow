@@ -47,14 +47,14 @@ gulp.task('plugins', function() {
   return gulp.src(paths.jsplugins.src)
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(concat('plugins.js'))
+    .pipe(concat('0plugins.js'))
     .pipe(gulp.dest(paths.jsplugins.dest));
 });
 
 
 // ---------------------------------------------- Gulp Task - combine all JS into  one file
 gulp.task('scripts', function() {
-  return gulp.src(['js/dev/plugins.js',paths.jsscripts.src])
+  return gulp.src(['js/dev/0plugins.js',paths.jsscripts.src])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(concat('main.js'))
