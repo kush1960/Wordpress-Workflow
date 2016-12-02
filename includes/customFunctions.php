@@ -1,6 +1,7 @@
 <?php
 
-/**
+/*************************************************************************
+ *
  * Flickity compatible custom galleries using the built in WP shortcode (inserted via media library)
  *
  * As used on BSHF.org
@@ -97,4 +98,41 @@ function gallery_shortcode_flickity( $attr ) {
 
 remove_shortcode('gallery', 'gallery_shortcode');
 add_shortcode('gallery', 'gallery_shortcode_flickity');
+
+
+
+
+
+
+
+/*************************************************************************
+*
+* Utility function to detect if current page is an ancestor of specifed 
+* post id.
+*
+* @param int post_id used to test ancestorship against.
+* @return bool true/false depending on weather or not the current page is an ancestor. 
+*/
+function is_ancestor( $post_id ) 
+{
+    global $wp_query;
+    $ancestors = $wp_query->post->ancestors;
+
+    if ( $post_id && $ancestors )
+    {
+        if ( in_array($post_id, $ancestors) ) 
+        {
+            return true;
+        } 
+        else 
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
 
