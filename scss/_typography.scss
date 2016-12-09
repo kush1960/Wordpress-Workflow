@@ -67,7 +67,8 @@ h1, h2, h3, h4, h5{
 h1{
         font-size: 2.6rem;
         line-height: 2.6rem;       
-        margin-bottom: 1.8rem;        
+        margin-bottom: 1.8rem;      
+        font-family: $bodyFont;
 }
 h2{
     font-size: 1.25rem; 
