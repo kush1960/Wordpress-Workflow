@@ -23,10 +23,14 @@ Includes Gulp for...
 
 ## Installing
 
-Checkout repo into the wp-content/themes/ folder
+Checkout repo into the project root folder
 ```
 git clone https://github.com/kush1960/Wordpress-Workflow.git <theme-name>
 ```
+Download the lastest stable Wordpress (https://wordpress.org/latest.zip) and copy over the top of the Workflow files
+
+In Terminal navigate to `wp-content/themes/workflow/`
+
 Install development dependencies with NPM
 ```
 npm install
@@ -63,3 +67,96 @@ At the end of a project you may want to minif your CSS/JS. Simply run
 npm run minify
 ```
 This will create `js/main.min.js` and `style.min.css`. It will only minify your existing CSS/JS - *it will not recompile anything*. 
+
+
+
+
+
+
+-----------------------------------------
+
+** README.md template for your live project **
+-----------------------------------------
+
+
+
+# {Name of Project} #
+
+
+{Brief paragraph introducing the project and describing it's functionality}
+
+
+Live URL 
+```
+http://www.{name of project}.co.uk/
+```
+
+
+Staging URL
+```
+http://{name of project}.devcite.co.uk/
+```
+
+
+Development URL
+```
+http://{name of project}.dev.co.uk/
+```
+
+
+## Local development setup ##
+
+
+{Description of how to setup the project for local development}
+
+
+### Project dependencies: 
++ [WordPress core](https://en-gb.wordpress.org/)
+
+
+### Front-end dependencies: 
+
+
++ [Sass](http://sass-lang.com/)
++ [Grunt](http://gruntjs.com/)
++ [Gulp](http://gulpjs.com/)
+
+
+### Required Plugins : 
+
+
++ [Advanced Custom Fields](https://en-gb.wordpress.org/plugins/advanced-custom-fields/)
++ [Advanced Custom Fields: Repeater Field](https://www.advancedcustomfields.com/add-ons/repeater-field/)
++ [Contact Form 7](https://wordpress.org/plugins/contact-form-7/)
++ [Really Simple CAPTCHA](https://wordpress.org/plugins/really-simple-captcha/)
++ [Redirection](https://wordpress.org/plugins/redirection/)
++ [Sitemap](https://wordpress.org/plugins/sitemap/)
++ [Types - Complete Solution for Custom Fields and Types](https://wp-types.com/)
++ [WordPress SEO](https://wordpress.org/plugins/wordpress-seo/)
++ [WP Store Locator](https://wordpress.org/plugins/wp-store-locator/)
+
+
+
+
+## Deployment ##
+
+
+This project is configured for auto deployment using DeployHQ. Auto deployment has been setup for the following branches:
+
+
+Staging site
+```
+staging
+```
+
+
+Live site
+```
+production
+```
+
+
+## Further information ##
+
+
+{Other information about the project here}
