@@ -1,5 +1,7 @@
 # Ignore everything in the root
+/index.php
 /*
+
 
 
 # Whitelist files in the root
