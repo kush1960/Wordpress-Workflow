@@ -1,3 +1,14 @@
+# Ignore everything in the root
+/*
+
+
+# Whitelist files in the root
+!.gitignore
+!.htaccess
+!README.md
+
+
+# Blacklist specific files associated with the build tools
 .DS_STORE
 node_modules
 npm_modules
@@ -11,3 +22,38 @@ Error.log
 *.sublime-project
 *.sublime-workspace
 sftp-config.json
+
+
+# Whitelist the wp-content directory
+!wp-content/
+
+
+# Ignore everything in the "wp-content" directory, except the themes and plugins directories.
+wp-content/*
+!wp-content/themes/
+!wp-content/plugins/
+
+
+# Ignore everything in the plugins directory again, before adding exceptions for specific plugins.
+wp-content/plugins/*
+# Example include for plugin folder = !wp-content/plugins/{name of plugin folder}
+
+
+# Blacklist index.php file in the themes and plugins directory
+wp-content/themes/index.php
+wp-content/plugins/index.php
+
+
+# Blacklist default WordPress themes
+wp-content/themes/twentyseventeen
+wp-content/themes/twentysixteen
+wp-content/themes/twentyfifteen
+wp-content/themes/twentyfourteen
+wp-content/themes/twentythirteen
+wp-content/themes/twentytwelve
+wp-content/themes/twentyeleven
+wp-content/themes/twentyten
+
+
+# Place additional files and folders we want to whitelist here.
+#!html/
