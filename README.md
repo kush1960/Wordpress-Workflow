@@ -25,7 +25,7 @@ Includes Gulp for...
 
 Checkout repo into the project root folder
 ```
-git clone https://github.com/kush1960/Wordpress-Workflow.git <theme-name>
+git clone https://github.com/kush1960/Wordpress-Workflow.git <public>
 ```
 Download the lastest stable Wordpress (https://wordpress.org/latest.zip) and copy over the top of the Workflow files
 
@@ -73,9 +73,14 @@ This will create `js/main.min.js` and `style.min.css`. It will only minify your 
 
 
 
+
+
+
+
 -----------------------------------------
 
 ** README.md template for your live project **
+
 -----------------------------------------
 
 
