@@ -79,7 +79,7 @@ This will create `js/main.min.js` and `style.min.css`. It will only minify your 
 
 -----------------------------------------
 
-** README.md template for your live project **
+# README.md template for your live project #
 
 -----------------------------------------
 
