@@ -1,5 +1,116 @@
 <?php
 
+
+
+
+
+/*************************************************************************
+* Find out the top most page's ID
+* Pass the Post Object, not the ID! 
+*
+*/
+function get_top_parent_id($post){
+
+  if($post->post_type != 'page'){
+    $post = archivePageInfo();
+  }
+  if ($post->post_parent)   {
+    $ancestors=get_post_ancestors($post->ID);
+    $root=count($ancestors)-1;
+    $parent = $ancestors[$root];
+  } else {
+    $parent = $post->ID;
+  }
+  return $parent;
+}
+
+
+/*************************************************************************
+* Returns object for the current page. 
+* Only useful for archive.php pages that return the first CPT info in $post
+* and not the details of the 'dummy' placeholder page defined in Admin Pages.
+*/
+
+function archivePageInfo() {
+	
+	global $post;
+
+	// get object of the current CPT
+	$postTypeInfo = get_post_type_object( $post->post_type );
+	
+	// if it's a post (not CPT) 
+	if( $postTypeInfo->name == 'post'){
+
+		return get_post(get_option( 'page_for_posts' ));
+
+	// if it's the search results page
+	}elseif(is_search()){
+		return get_post('2213'); // the url could change in different languages, so use the ID.
+
+	// it's a CPT
+	}else{
+		
+		// lookup the slug defined in the rewrite rules for the CPT
+	    $path = $postTypeInfo->rewrite['slug'];
+
+	    // check the slug isn't invalid ie. events/%event-type% for the rewrite rules, and correct.
+	    if(strpos($path, '%') !== FALSE){
+	    	$path = strstr($path, '%', true);
+	    }
+
+	    // create an object of the CPT's archive page by looking it up using it's path set in WP admin Pages section
+	    $archivePage = get_page_by_path($path);
+
+	    return $archivePage; 		
+	}
+
+
+
+}
+
+
+
+
+
+/*************************************************************************
+* Highlight current page in wp_list_pages
+* CPT archive pages doesn't have current_page_item class - this adds it in
+*/
+
+function wp_list_pages_filter($output) {
+
+	// hook in to wp_list_pages and add a .current_page_item class to CPT archive pages
+	// WP doesn't do this by default :(
+		global $post;
+		$archivePage = archivePageInfo(); // get archive page info
+		
+		if($archivePage){
+			// search menu for start position archive page ID
+			$insertPos = strpos($output, "$archivePage->ID"); 
+
+			//get the length (in chars) of archive page ID
+			$stringLength = strlen($archivePage->ID); 
+
+			// offset the start pos of archive page ID with length of the archive page ID 
+			// this will ensure our inserted class appears after the ID class
+			$insertPos = $insertPos + $stringLength; 
+
+			// insert the current page class into the string
+			$modifiedOutput = substr_replace($output, ' current_page_item', $insertPos, 0);
+
+			return $modifiedOutput;
+		}else{
+			return $output;
+		}
+	}
+
+add_filter('wp_list_pages', 'wp_list_pages_filter');
+
+
+
+
+
+
 /*************************************************************************
  *
  * Flickity compatible custom galleries using the built in WP shortcode (inserted via media library)
