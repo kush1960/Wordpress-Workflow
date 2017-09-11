@@ -28,6 +28,7 @@ var gulp = require('gulp'),
     concat  = require('gulp-concat'),
     uglify  = require('gulp-uglify'),
     jshint  = require('gulp-jshint'),
+    headerComment = require('gulp-header-comment'),
     sourcemaps  = require('gulp-sourcemaps');
 
 // ---------------------------------------------- Gulp Task - CSS
@@ -37,6 +38,9 @@ gulp.task('sass', function() {
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer('last 2 version'))
     .pipe(sourcemaps.write(paths.sass.dest))
+    .pipe(headerComment({
+      file: 'themeDetails.txt'
+    }))
     .pipe(gulp.dest(paths.sass.dest))
     .pipe(browserSync.reload({stream: true}))
 });

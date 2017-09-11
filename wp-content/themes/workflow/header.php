@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js no-mq lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js no-mq lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js no-mq lt-ie9"> <![endif]-->
 <!--[if IE 9]>         <html class="no-js ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
@@ -37,7 +34,8 @@
 <img src="<?php bloginfo('template_directory'); ?>/img/logo.png" alt="logo" />
 
 
-<nav>
+
+<nav class="mainNav">
 	<ul>
     <!--<li <?php if(is_page( 'home-page' )){ echo 'class="current_page_item"';} ?>><a title="Home" href="<?php echo esc_url( home_url() ); ?>">Home</a></li>-->
 
@@ -53,6 +51,25 @@
 
 		wp_list_pages( $args )
 	?> 
+	</ul>
+</nav>
+
+
+
+<nav class="mainNav">
+	<ul>
+		<?php
+			$args = array(
+				'exclude_tree'	=> '',
+				'depth'      	=> 2,
+				'title_li' 		=> '',
+				'meta_key'   	=> 'show_in_menu',
+				'meta_value' 	=> '1',			
+				'post_status' 	=> 'publish'
+			);
+
+			wp_list_pages( $args );
+		?> 
 	</ul>
 </nav>
 

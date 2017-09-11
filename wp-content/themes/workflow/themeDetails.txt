@@ -1,0 +1,4 @@
+Theme Name: Theme name
+Description: Theme Description
+Template: workflow
+Author: CITE DMS
