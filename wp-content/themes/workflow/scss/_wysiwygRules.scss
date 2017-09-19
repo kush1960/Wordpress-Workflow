@@ -17,7 +17,7 @@
 
 	/* Non full width imgs */
 	img.alignleft{
-		@include breakpoint($small) {
+		@include breakpoint($tabletAndUp) {
 			margin:0 1.5em 0 0;
 			float: left;
 		}
@@ -106,3 +106,70 @@ blockquote.right {
 .size-large {}
 .size-medium {}
 .size-thumbnail {}
+
+span {
+	&.button {
+		cursor: pointer;
+		&.blueTransparent {
+			color: $blue;
+		}
+		&.greenTransparent {
+			color: $green;
+			border-color: $green;
+			&:hover {
+				background: $green;
+			}
+		}
+		&.orangeTransparent {
+			color: $orange;
+			border-color: $orange;
+			&:hover {
+				background: $orange;
+			}
+		}
+	}
+	&:hover {
+		a {
+			color: #fff;
+		}		
+	}
+}
+
+.download-icon {
+	display: block;
+	a {
+		background:url("img/icons/download.svg") no-repeat;
+	    width: 15px;
+	    height: 9px;
+	    background-size: contain;
+	    cursor: pointer;
+		background-position: left center;
+		padding-left: 30px;
+		
+	}
+}
+table{
+	width: 100%;
+	
+	margin: 0 0 2rem 0;
+	border-spacing: 0;
+
+	tr{
+		padding: 0;
+		border-bottom: 1px solid $midGrey;
+	}
+	thead > tr{
+		border-bottom:	none;
+	}
+	td, th{
+		padding: .5rem .5rem;
+		margin: 0;
+	}
+	thead{
+		background-color: $lightGrey;
+		font-weight: bold;
+	}
+	thead td, thead th{
+		border-bottom: 0;
+	}
+}
